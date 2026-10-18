@@ -66,20 +66,24 @@ export default function Startseite() {
         </div>
       </section>
 
-      {/* Einsatzgebiete */}
-      <section className="st-block st-block-oben0" id="einsatz" aria-labelledby="st-h-einsatz">
+      <StNaht von="#08080A" nach="#F3F4F6" />
+
+      {/* Einsatzgebiete (heller Block) */}
+      <section className="st-hell st-block" id="einsatz" aria-labelledby="st-h-einsatz">
         <div className="st-wrap">
           <div className="st-kopf">
             <h2 id="st-h-einsatz">Einsatzgebiete von KI in der Industrie</h2>
             <p>Mögliche Abläufe bei Herstellern und Zulieferern. Welcher sich bei Ihnen lohnt, klärt die Prozessanalyse.</p>
           </div>
           <StEinsatz />
-          <p className="st-fuss-cta"><a className="st-knopf st-knopf-weiss" href="#kontakt">Ablauf besprechen</a></p>
+          <p className="st-fuss-cta"><a className="st-knopf st-knopf-schwarz" href="#kontakt">Ablauf besprechen</a></p>
         </div>
       </section>
 
+      <StNaht von="#F3F4F6" nach="#08080A" />
+
       {/* Leistungen */}
-      <section className="st-block st-block-oben0" id="leistungen" aria-labelledby="st-h-leist">
+      <section className="st-block" id="leistungen" aria-labelledby="st-h-leist">
         <div className="st-wrap">
           <div className="st-kopf">
             <h2 id="st-h-leist">Ein Partner von der Analyse bis zum Betrieb.</h2>
@@ -126,8 +130,10 @@ export default function Startseite() {
         </div>
       </section>
 
-      {/* Gründer + Zertifikate */}
-      <section className="st-block st-block-oben0" id="unternehmen" aria-labelledby="st-h-gruender">
+      <StNaht von="#08080A" nach="#F3F4F6" />
+
+      {/* Gründer + Zertifikate (heller Block, geht in den Kontakt über) */}
+      <section className="st-hell st-block" id="unternehmen" aria-labelledby="st-h-gruender">
         <div className="st-wrap">
           <div className="st-gruender">
             <div className="st-platz st-foto" data-platzhalter="foto"><div><strong>Platzhalter: Foto</strong><span>Melih Dönmez</span></div></div>
@@ -148,8 +154,6 @@ export default function Startseite() {
           </section>
         </div>
       </section>
-
-      <StNaht von="#08080A" nach="#F3F4F6" />
 
       {/* Kontakt (heller Block) */}
       <section className="st-hell st-block" id="kontakt" aria-labelledby="st-h-kontakt">
