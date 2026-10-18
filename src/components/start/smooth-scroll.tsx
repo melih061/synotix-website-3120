@@ -10,11 +10,8 @@ const KOPFHOEHE = 72;
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t: number) => 1 - Math.pow(1 - t, 4),
-      smoothWheel: true,
-    });
+    // lerp: je höher, desto schneller folgt die Seite dem Mausrad (Standard wäre 0.1).
+    const lenis = new Lenis({ lerp: 0.2, wheelMultiplier: 1.1, smoothWheel: true });
     let frame = requestAnimationFrame(function raf(time: number) {
       lenis.raf(time);
       frame = requestAnimationFrame(raf);
@@ -29,7 +26,7 @@ export function SmoothScroll() {
       const ziel = document.getElementById(id);
       if (!ziel) return;
       e.preventDefault();
-      lenis.scrollTo(ziel, { offset: -KOPFHOEHE });
+      lenis.scrollTo(ziel, { offset: -KOPFHOEHE, duration: 0.7 });
       history.replaceState(history.state, "", `#${id}`);
       ziel.setAttribute("tabindex", "-1");
       ziel.focus({ preventScroll: true });

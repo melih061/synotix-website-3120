@@ -86,7 +86,7 @@ html[data-st-ruhe="an"] .st-puls, html[data-st-ruhe="an"] .st-burst-kern i { ani
 @keyframes st-atmen { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
 
 /* Pixel-Übergang */
-.st-naht { display: block; width: 100%; height: 40px; image-rendering: pixelated; }
+.st-naht { display: block; width: 100%; height: 56px; }
 
 /* Abschnitte */
 .st-block { padding: clamp(80px, 10vw, 150px) var(--st-rand); background: var(--st-schwarz); }
