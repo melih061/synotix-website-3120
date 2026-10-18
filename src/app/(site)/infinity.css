@@ -1,0 +1,343 @@
+/* ============================================================
+   SYNOTIX v4 — Designsystem nach Referenz „InfinityMade"
+   Wird nach blau.css + site-chrome.css geladen und überschreibt
+   deren Tokens → alle Unterseiten übernehmen das neue Erscheinungsbild.
+   ============================================================ */
+
+:root {
+  /* Referenz-Palette */
+  --im-bg: #F5F6F9;
+  --sx-mist: #EEF2F9;
+  --sx-green: #22C55E;
+  --im-ink: #111111;
+  --im-mute: #5E5D66;
+  --im-black: #000000;
+  --im-v900: #070D1F;
+  --im-v800: #0E1A3A;
+  --im-v700: #22386F;
+  --im-v600: #22386F;
+  --im-v550: #3E5BA6;
+  --im-v500: #3E5BA6;
+  --im-v300: #8FA8E6;
+  --im-lav: #E6ECF7;
+  --im-lav-2: #DCE4F3;
+  --im-plum: #0E1A3A;
+  --im-line-lt: #D6D6D8;
+  --im-line-dk: rgba(255, 255, 255, .16);
+  --im-ease: cubic-bezier(.16, .84, .44, 1);
+
+  /* Bestehende Tokens umdeuten (gelten für alle Unterseiten) */
+  --ink: #0C0A14;
+  --ink-2: #0C0A14;
+  --ink-3: #0E0C16;
+  --ink-4: #17141F;
+  --paper: #FFFFFF;
+  --paper-2: var(--im-bg);
+  --fg: #FFFFFF;
+  --fg-soft: #B9B5C9;
+  --fg-mute: #8A869C;
+  --ink-fg: var(--im-ink);
+  --ink-fg-soft: var(--im-mute);
+  --line: rgba(255, 255, 255, .12);
+  --line-2: rgba(255, 255, 255, .24);
+  --line-lt: var(--im-line-lt);
+  --blue: var(--im-v550);
+  --blue-hi: var(--im-v500);
+  --blue-soft: rgba(62, 91, 166, .40);
+  --blue-faint: rgba(62, 91, 166, .12);
+  --blue-glow: rgba(62, 91, 166, .10);
+  --f: var(--font-sora), "Sora", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --radius: 10px;
+  --radius-lg: 16px;
+}
+
+body { font-family: var(--f); letter-spacing: -.005em; }
+
+/* ── Grundraster ─────────────────────────────────────────── */
+.im-wrap { max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4.9vw, 70px); }
+.s-light, .s-soft { background: var(--im-bg); color: var(--im-ink); }
+
+/* ── Eyebrow: „• Label" ───────────────────────────────────── */
+.eyebrow, .im-eyebrow {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--f); font-size: 15px; font-weight: 400;
+  letter-spacing: 0; text-transform: none; color: inherit;
+  margin: 0 0 22px;
+}
+.eyebrow::before, .im-eyebrow::before {
+  content: ""; width: 6px; height: 6px; border-radius: 50%;
+  background: currentColor; flex: none;
+}
+
+/* ── Überschriften ───────────────────────────────────────── */
+.im-h2 { font-weight: 500; letter-spacing: -.035em; line-height: 1.05; margin: 0 0 34px; text-wrap: balance; }
+.im-h2-lg { font-size: clamp(32px, 3.9vw, 54px); line-height: 1.12; }
+.im-h2-xl { font-size: clamp(38px, 4.7vw, 66px); }
+.sec-head h2, .page-h1 { font-weight: 500; letter-spacing: -.035em; }
+.sec-head h2 .dim, .page-h1 .dim { color: rgba(255, 255, 255, .45); }
+.s-light .sec-head h2 .dim { color: rgba(17, 17, 17, .45); }
+
+/* ── Pill-Buttons ────────────────────────────────────────── */
+.im-pill {
+  display: inline-flex; align-items: center; gap: 28px;
+  padding: 14px 20px 14px 22px; border-radius: 999px;
+  font-family: var(--f); font-size: 15px; font-weight: 500; line-height: 1;
+  border: 1px solid transparent; transition: background .25s, color .25s, border-color .25s, transform .25s var(--im-ease);
+  white-space: nowrap;
+}
+.im-pill svg { transition: transform .3s var(--im-ease); }
+.im-pill:hover svg { transform: translate(3px, -3px); }
+.im-pill:active { transform: scale(.98); }
+.im-pill-dark { background: var(--im-ink); color: #fff; }
+.im-pill-dark:hover { background: var(--im-v700); }
+.im-pill-light { background: #fff; color: var(--im-ink); }
+.im-pill-light:hover { background: var(--im-lav); }
+.im-pill-line { border-color: var(--im-line-dk); color: #fff; }
+.im-pill-line:hover { border-color: #fff; }
+.im-pill-glass { background: rgba(255, 255, 255, .08); color: #fff; border-color: rgba(255, 255, 255, .18); backdrop-filter: blur(12px); }
+.im-pill-glass:hover { background: rgba(255, 255, 255, .16); }
+.im-pill:focus-visible, .im-round:focus-visible, .im-burger:focus-visible { outline: 2px solid var(--im-v500); outline-offset: 3px; }
+
+/* bestehende Buttons der Unterseiten angleichen */
+.btn { border-radius: 999px; font-weight: 500; }
+.btn-pri { background: #fff; color: var(--im-ink); }
+.btn-pri:hover { background: var(--im-lav); box-shadow: none; }
+.s-light .btn-pri, .s-soft .btn-pri { background: var(--im-ink); color: #fff; }
+.s-light .btn-pri:hover, .s-soft .btn-pri:hover { background: var(--im-v700); }
+
+.im-round {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; flex: none;
+  border-radius: 50%; border: 1px solid currentColor; background: transparent; color: inherit;
+  cursor: pointer; transition: background .2s, color .2s;
+}
+.im-round-lg { width: 46px; height: 46px; }
+.im-round:hover { background: var(--im-ink); color: #fff; border-color: var(--im-ink); }
+
+.im-badge {
+  position: absolute; top: 20px; left: 20px; z-index: 2;
+  padding: 7px 13px; border-radius: 999px; font-size: 13px; line-height: 1;
+  background: rgba(255, 255, 255, .92); color: var(--im-ink);
+}
+.im-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.im-tags span, .im-tag-dark {
+  display: inline-block; padding: 8px 12px; border-radius: 999px; font-size: 13px; line-height: 1;
+  border: 1px solid var(--im-line-lt);
+}
+.im-tag-dark { border-color: var(--im-line-dk); color: #fff; }
+
+/* ── Logo ────────────────────────────────────────────────── */
+.im-logo { display: inline-flex; align-items: center; gap: 10px; color: #fff; }
+.im-logo-word { font-family: var(--f); font-size: 22px; font-weight: 600; letter-spacing: -.03em; }
+
+/* ── Navigation ──────────────────────────────────────────── */
+/* blau.css stylt nackte nav/footer-Elemente; hier zurücksetzen */
+.im-nav nav { position: static; background: none; backdrop-filter: none; border: 0; z-index: auto; }
+footer.im-footer { border-top: 0; }
+.im-skip { position: absolute; left: 16px; top: -60px; z-index: 200; padding: 10px 16px; border-radius: 999px; background: #fff; color: var(--im-ink); }
+.im-skip:focus { top: 12px; }
+/* Wie Referenz: Leiste scrollt mit weg, nur der runde Menü-Knopf bleibt schwebend */
+.im-nav { position: absolute; inset: 0 0 auto 0; z-index: 90; color: #fff; }
+.im-nav.is-open { position: fixed; }
+.im-nav-in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; height: 92px; max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 4.9vw, 70px); position: relative; z-index: 2; }
+.im-burger { position: relative; z-index: 3; }
+.im-nav.is-scrolled:not(.is-open) .im-burger { position: fixed; top: 20px; right: clamp(20px, 4.9vw, 70px); box-shadow: 0 10px 30px -10px rgba(7, 13, 31, .6); background: rgba(7, 13, 31, .82); }
+.im-nav-brand { justify-self: start; }
+.im-nav-tag { margin: 0; text-align: center; white-space: nowrap; font-size: 13.5px; line-height: 1.4; color: rgba(255, 255, 255, .72); }
+.im-nav-right { justify-self: end; display: flex; align-items: center; gap: 12px; }
+.im-nav-cta { padding: 12px 16px 12px 20px; gap: 14px; font-size: 14px; }
+.im-burger {
+  width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .22);
+  background: rgba(7, 13, 31, .55); backdrop-filter: blur(10px);
+  display: grid; place-content: center; gap: 6px; cursor: pointer;
+}
+.im-burger span { display: block; width: 18px; height: 1.6px; background: #fff; transition: transform .3s var(--im-ease); }
+.im-nav.is-open .im-burger span:first-child { transform: translateY(3.8px) rotate(45deg); }
+.im-nav.is-open .im-burger span:last-child { transform: translateY(-3.8px) rotate(-45deg); }
+
+.im-menu {
+  position: fixed; inset: 0; z-index: 1; overflow-y: auto;
+  padding: 120px clamp(20px, 4.9vw, 70px) 40px;
+  background:
+    radial-gradient(60% 50% at 15% 10%, rgba(62, 91, 166, .55), transparent 70%),
+    radial-gradient(50% 50% at 90% 90%, rgba(143, 168, 230, .14), transparent 70%),
+    #070D1F;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.im-menu[hidden] { display: none; }
+.im-menu-in { display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; max-width: 1300px; width: 100%; margin: 0 auto; }
+.im-menu ul { list-style: none; margin: 0; padding: 0; }
+.im-menu-primary a {
+  display: flex; align-items: baseline; gap: 18px; padding: 6px 0;
+  font-size: clamp(32px, 4.4vw, 58px); font-weight: 500; letter-spacing: -.035em; line-height: 1.12;
+  color: rgba(255, 255, 255, .9); transition: color .2s, transform .3s var(--im-ease);
+}
+.im-menu-primary a:hover, .im-menu-primary a[aria-current="page"] { color: var(--im-v300); transform: translateX(6px); }
+.im-menu-n { font-size: 13px; letter-spacing: 0; color: rgba(255, 255, 255, .45); min-width: 22px; }
+.im-menu-primary li { animation: im-menu-in .5s var(--im-ease) both; animation-delay: calc(var(--i) * 40ms); }
+@keyframes im-menu-in { from { opacity: 0; transform: translateY(14px); } }
+.im-menu-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 40px; align-content: start; padding-top: 12px; }
+.im-menu-lbl { margin: 0 0 14px; font-size: 13px; color: rgba(255, 255, 255, .62); }
+.im-menu-groups a { display: block; padding: 6px 0; font-size: 16px; color: rgba(255, 255, 255, .85); }
+.im-menu-groups a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.im-menu-foot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; max-width: 1300px; width: 100%; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--im-line-dk); font-size: 14px; color: rgba(255, 255, 255, .6); }
+
+/* alte Navigationsklassen sind ersetzt; Seiten-Hero rückt unter die feste Navigation */
+.page-top { padding-top: 150px; }
+
+/* ── Seiten-Hero der Unterseiten: kosmischer Verlauf ─────── */
+.s-dark.page-top, .rs-head, .s-dark .reise-head {
+  background:
+    radial-gradient(55% 70% at 18% 0%, rgba(62, 91, 166, .55), transparent 70%),
+    radial-gradient(40% 60% at 92% 30%, rgba(34, 56, 111, .55), transparent 70%),
+    radial-gradient(30% 40% at 75% 100%, rgba(143, 168, 230, .10), transparent 70%),
+    linear-gradient(180deg, #0B1430 0%, #070D1F 70%, #000 100%);
+}
+
+/* ── Karten der Unterseiten ──────────────────────────────── */
+.uc-cell, .hub-card, .node-card { border-radius: var(--radius-lg); }
+.s-light .uc-cell, .s-light .hub-card { background: #fff; border-color: var(--im-line-lt); color: var(--im-ink); }
+.s-light .uc-cell p, .s-light .hub-card p { color: var(--im-mute); }
+
+
+/* ── Unterseiten: Raster, Labels, Formulare an v4 angleichen ─ */
+.wrap { max-width: 1440px; padding: 0 clamp(20px, 4.9vw, 70px); }
+.back-link { font-family: var(--f); font-size: 14px; letter-spacing: 0; text-transform: none; color: rgba(255, 255, 255, .7); }
+.back-link:hover { color: #fff; }
+.s-dark .status-badge { color: #8FA8E6; border-color: rgba(143, 168, 230, .45); background: rgba(62, 91, 166, .14); }
+.status-badge { font-family: var(--f); font-size: 13px; letter-spacing: 0; text-transform: none; border-radius: 999px; padding: 7px 13px; }
+.cfield label { font-family: var(--f); font-size: 14px; letter-spacing: 0; text-transform: none; color: rgba(255, 255, 255, .72); }
+.cfield input, .cfield select, .cfield textarea { border-radius: 10px; font-family: var(--f); }
+.uc-cell .n { font-family: var(--f); letter-spacing: 0; }
+
+/* ── /demo: eigenes Skin (globals.css) auf v4 umstellen ───── */
+.demo-skin {
+  --f-display: var(--f);
+  --f-display-serif: var(--f);
+  --f-body: var(--f);
+  padding-top: 92px;
+  background: #000;
+}
+.demo-skin .h1-editorial, .demo-skin .h1-syne { font-weight: 500; letter-spacing: -.035em; line-height: 1.04; }
+.demo-skin > div > section:first-of-type {
+  background:
+    radial-gradient(55% 70% at 18% 0%, rgba(62, 91, 166, .55), transparent 70%),
+    radial-gradient(40% 60% at 92% 30%, rgba(34, 56, 111, .55), transparent 70%),
+    linear-gradient(180deg, #0B1430 0%, #070D1F 70%, #000 100%);
+}
+.demo-skin .chip { border-radius: 999px; }
+
+/* ── Footer ──────────────────────────────────────────────── */
+.im-footer {
+  position: relative; overflow: hidden; color: #fff; padding: 110px 0 0;
+  background: linear-gradient(180deg, #0E1A3A 0%, #070D1F 35%, #04070F 70%, #000 100%);
+}
+.im-footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1.4fr; gap: 40px; padding-bottom: 56px; }
+.im-footer-brand p { margin: 26px 0 0; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, .72); max-width: 40ch; }
+.im-footer-col { list-style: none; margin: 0; padding: 0; }
+.im-footer-col a { display: block; padding: 6px 0; font-size: 15px; color: rgba(255, 255, 255, .85); }
+.im-footer-col a:hover, .im-footer-legal a:hover, .im-footer-top-link:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.im-footer-lbl { margin: 0 0 12px; font-size: 13px; color: rgba(255, 255, 255, .62); }
+.im-footer-strong { display: flex; width: max-content; align-items: center; gap: 6px; margin-bottom: 12px; font-size: 16px; }
+.im-footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding: 26px 0; border-top: 1px solid var(--im-line-dk); font-size: 13px; color: rgba(255, 255, 255, .6); }
+.im-footer-legal { display: flex; flex-wrap: wrap; gap: 26px; }
+.im-footer-word {
+  font-size: clamp(80px, 21vw, 330px); font-weight: 500; letter-spacing: -.02em; line-height: .78;
+  text-align: center; color: rgba(255, 255, 255, .07); user-select: none; margin-top: 30px;
+  transform: translateY(8%);
+}
+
+
+/* ── Desktop-Leiste mit Aufklappmenüs (ab 1101 px) ─────────── */
+.im-topnav ul { list-style: none; margin: 0; padding: 0; }
+.im-topnav > ul { display: flex; align-items: center; gap: 4px; }
+.im-topnav > ul > li { position: relative; }
+.im-topnav-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; border: 0; border-radius: 999px; background: none; color: rgba(255, 255, 255, .82); font: inherit; font-size: 14.5px; font-weight: 500; cursor: pointer; transition: background .25s, color .25s; }
+.im-topnav-btn svg { transition: transform .3s var(--im-ease); opacity: .7; }
+.im-topnav-btn:hover, .im-topnav li.is-drop > .im-topnav-btn, .im-topnav-btn.is-active { color: #fff; background: rgba(255, 255, 255, .08); }
+.im-topnav li.is-drop > .im-topnav-btn svg { transform: rotate(180deg); }
+.im-topnav-btn:focus-visible { outline: 2px solid #8FA8E6; outline-offset: 2px; }
+/* Unsichtbare Brücke, damit das Menü beim Hinüberfahren offen bleibt */
+.im-drop { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); padding-top: 12px; width: 340px; }
+.im-drop::before { content: ""; position: absolute; inset: 12px 0 0; border-radius: 16px; background: #fff; box-shadow: 0 40px 80px -30px rgba(7, 13, 31, .55), 0 0 0 1px rgba(12, 10, 20, .06); }
+.im-drop > * { position: relative; }
+.im-drop:not([hidden]) { animation: imDropIn .22s var(--im-ease); }
+@keyframes imDropIn { from { opacity: 0; transform: translate(-50%, -6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+.im-drop ul { padding: 10px 10px 4px; display: grid; gap: 2px; }
+.im-drop a { display: block; padding: 11px 14px; border-radius: 10px; color: var(--im-ink); transition: background .2s; }
+.im-drop a:hover, .im-drop a:focus-visible { background: #F0F4FB; outline: none; }
+.im-drop a[aria-current="page"] { background: #E6ECF7; }
+.im-drop b { display: block; font-size: 14.5px; font-weight: 500; }
+.im-drop small { display: block; margin-top: 2px; font-size: 12.5px; line-height: 1.4; color: #5B6275; }
+.im-drop .im-drop-all { display: flex; align-items: center; gap: 8px; margin: 4px 10px 10px; padding: 12px 14px; border-top: 1px solid #E3E8F1; border-radius: 0 0 10px 10px; font-size: 13.5px; font-weight: 500; color: #22386F; }
+@media (prefers-reduced-motion: reduce) { .im-drop:not([hidden]) { animation: none; } }
+
+/* Desktop: Leiste bleibt beim Scrollen oben sichtbar, Menü-Knopf entfällt */
+@media (min-width: 1101px) {
+  .im-burger { display: none; }
+  .im-nav.is-scrolled { position: fixed; background: rgba(7, 13, 31, .9); backdrop-filter: blur(14px); box-shadow: 0 1px 0 rgba(255, 255, 255, .08); }
+  .im-nav.is-scrolled .im-nav-in { height: 72px; }
+}
+@media (max-width: 1100px) {
+  .im-topnav { display: none; }
+  .im-nav-in { grid-template-columns: 1fr auto; }
+}
+
+/* ── Responsiv ───────────────────────────────────────────── */
+@media (max-width: 980px) {
+  .im-nav-tag, .im-nav-cta { display: none; }
+  .im-nav-in { grid-template-columns: 1fr auto; }
+  .im-menu-in { grid-template-columns: 1fr; gap: 40px; }
+  .im-footer-top { grid-template-columns: 1fr 1fr; }
+  .im-footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .im-menu-groups { grid-template-columns: 1fr; }
+  .im-burger { width: 44px; height: 44px; }
+  .im-nav.is-scrolled:not(.is-open) .im-burger { top: 12px; }
+  .im-footer-top { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .im-menu-primary li { animation: none; }
+  .im-pill, .im-pill svg, .im-menu-primary a { transition: none; }
+}
+
+/* ============================================================
+   High-End-Feinschliff (Skill high-end-visual-design)
+   ============================================================ */
+
+/* Button-in-Button: Pfeil sitzt in eigenem Kreis, bündig rechts */
+.im-pill:has(> svg:last-child) { padding: 6px 6px 6px 22px; gap: 18px; }
+.im-pill > svg:last-child {
+  box-sizing: content-box; width: 16px; height: 16px; padding: 10px; border-radius: 50%;
+  background: rgba(255, 255, 255, .14);
+  transition: transform .5s cubic-bezier(.32, .72, 0, 1), background .3s;
+}
+.im-pill-light > svg:last-child { background: rgba(12, 10, 20, .07); }
+.im-pill:hover > svg:last-child { transform: translate(2px, -2px) scale(1.06); }
+.im-pill-dark:hover > svg:last-child { background: rgba(255, 255, 255, .22); }
+.im-nav-cta.im-pill { padding: 5px 5px 5px 18px; }
+.im-nav-cta > svg:last-child { padding: 8px; }
+
+/* feinere Icon-Linien; Häkchen bleiben kräftig */
+.lucide { stroke-width: 1.5; }
+.sx-checks .lucide { stroke-width: 2.2; }
+
+/* Korn-Textur: fest, ohne Klicks abzufangen, kaum sichtbar */
+body::after {
+  content: ""; position: fixed; inset: 0; z-index: 70; pointer-events: none; opacity: .035;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+
+/* Scroll-Einblendung (nur mit JS, nie bei reduced-motion) */
+.im-js-reveal [data-reveal] {
+  opacity: 0; transform: translate3d(0, 28px, 0);
+  transition: opacity .9s cubic-bezier(.32, .72, 0, 1), transform 1s cubic-bezier(.32, .72, 0, 1);
+  transition-delay: calc(var(--d, 0) * 80ms);
+}
+.im-js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .im-js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* Footer: Markenhinweis */
+.im-footer-note { margin: 0; padding: 0 0 26px; font-size: 12px; color: rgba(255, 255, 255, .5); }

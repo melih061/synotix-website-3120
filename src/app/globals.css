@@ -1,0 +1,320 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ── DESIGN TOKENS — APPLE-STYLE · MONOCHROME · CALM ─────────
+   Reines Schwarz, präzise Graustufen (Apple #86868B), EIN dezenter
+   Blau-Akzent (Apple #2997FF / #0071E3). Keine Neon-Glows, kein
+   Grid, keine HUD-Klammern. Großzügiger Weißraum, ruhige Motion.
+   Legacy-Tokennamen (--violet/--teal/--cyan) bleiben als Alias auf
+   das Blau-System, damit Bestandskomponenten erben.             */
+:root {
+  --bg-0:    #000000;
+  --bg-1:    #060607;
+  --bg-2:    #161617;
+  --bg-3:    #1D1D1F;
+  --bg-4:    #2A2A2D;
+
+  /* ── Apple-Blau — einziger Akzent ── */
+  --blue:       #2997FF;
+  --blue-dim:   #0071E3;
+  --blue-mid:   #2997FF;
+  --blue-soft:  #9CD0FF;
+  --blue-deep:  #0058B0;
+  --blue-glow:  rgba(41, 151, 255, 0.10);
+  --blue-line:  rgba(41, 151, 255, 0.28);
+  --blue-edge:  rgba(41, 151, 255, 0.50);
+
+  /* ── Sekundär (gleiche Blau-Familie, leicht heller) ── */
+  --sky:       #5AC8FA;
+  --sky-mid:   #9BDCFB;
+  --sky-glow:  rgba(90, 200, 250, 0.08);
+  --sky-line:  rgba(90, 200, 250, 0.24);
+
+  /* ── Legacy-Alias → Blau ── */
+  --violet:      var(--blue);
+  --violet-dim:  var(--blue-dim);
+  --violet-mid:  var(--blue-mid);
+  --violet-glow: var(--blue-glow);
+  --violet-line: var(--blue-line);
+
+  --cyan:      var(--sky);
+  --cyan-dim:  #1F91C4;
+  --cyan-mid:  var(--sky-mid);
+  --cyan-glow: var(--sky-glow);
+  --cyan-line: var(--sky-line);
+
+  --teal:      var(--blue);
+  --teal-dim:  var(--blue-dim);
+  --teal-mid:  var(--blue-mid);
+  --teal-soft: var(--blue-soft);
+  --teal-glow: var(--blue-glow);
+  --teal-line: var(--blue-line);
+  --teal-deep: var(--blue-edge);
+
+  /* ── Status — kein Grün mehr: Weiß für live/erledigt ── */
+  --ok-mid:  #FFFFFF;
+  --ok-glow: rgba(255, 255, 255, 0.08);
+  --ok-line: rgba(255, 255, 255, 0.22);
+  --ok:      #FFFFFF;
+  --warn:    #FF9F0A;
+  --err:     #FF453A;
+
+  /* ── Text — Apple-Graustufen ── */
+  --tx-0:   #F5F5F7;
+  --tx-1:   #86868B;
+  --tx-2:   #6E6E73;
+  --tx-inv: #1D1D1F;
+  --bg-paper: #0A0A0B;
+  --bd:    rgba(255, 255, 255, 0.08);
+  --bd-hi: rgba(255, 255, 255, 0.16);
+
+  /* Distinktiver Grotesk (Celonis-nah); Mono nur für echte Daten/Code */
+  --f-display:       'Hanken Grotesk', 'Figtree', -apple-system, sans-serif;
+  --f-display-serif: 'Hanken Grotesk', sans-serif;
+  --f-body:          'Hanken Grotesk', 'Figtree', -apple-system, sans-serif;
+  --f-mono:          var(--font-jetbrains), 'JetBrains Mono', 'SF Mono', monospace;
+
+  --background: var(--bg-0);
+  --foreground: var(--tx-0);
+  --border:     var(--bd);
+  --ring:       var(--blue);
+
+  /* ── Radius (Apple: großzügig & weich) ── */
+  --r-sm:    12px;
+  --r-card:  18px;
+  --r-panel: 22px;
+  --r-pill:  980px;
+  --radius:  var(--r-card);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border:     var(--border);
+  --color-ring:       var(--ring);
+  --font-sans:        var(--font-hanken), var(--font-figtree);
+  --font-mono:        var(--font-jetbrains);
+  --font-display:     var(--font-hanken), var(--font-figtree);
+  --font-display-serif: var(--font-hanken);
+  --radius-sm:  var(--r-sm); --radius-md: var(--r-card); --radius-lg: var(--r-card);
+  --radius-xl:  var(--r-panel); --radius-2xl: var(--r-panel);
+}
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--f-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-color: var(--bg-0);
+    color: var(--tx-0);
+  }
+
+  /* Karten-Flächen zentral abrunden (Inline-Style --bg-1|2|3|4) */
+  main [style*="--bg-1)"],
+  main [style*="--bg-2)"],
+  main [style*="--bg-3)"],
+  main [style*="--bg-4)"] {
+    border-radius: var(--r-card);
+  }
+}
+
+/* ── HINTERGRÜNDE — neutralisiert (kein Grid/Neon, nur sanftes Licht) ── */
+.bg-grid,
+.bg-blueprint,
+.bg-aurora { background: none; }
+
+.bg-ambient-top {
+  background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(255,255,255,0.05), transparent 70%);
+}
+.bg-ambient-center {
+  background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(41,151,255,0.05), transparent 75%);
+}
+
+/* ── TYPOGRAFIE — große, eng gesetzte Grotesk (Celonis-Stil) ──── */
+.h1-syne, .h1-editorial {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(3rem, 7.2vw, 6rem);
+  line-height: 1.0; letter-spacing: -0.03em; color: var(--tx-0);
+}
+.h2-syne, .h2-editorial {
+  font-family: var(--f-display); font-weight: 700;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  line-height: 1.02; letter-spacing: -0.028em; color: var(--tx-0);
+}
+.h3-syne {
+  font-family: var(--f-display); font-weight: 600;
+  font-size: clamp(1.375rem, 2.4vw, 1.875rem);
+  line-height: 1.15; letter-spacing: -0.015em; color: var(--tx-0);
+}
+.lead-editorial {
+  font-family: var(--f-body); font-size: 1.1875rem; font-weight: 400;
+  line-height: 1.5; color: var(--tx-1); max-width: 38rem;
+}
+/* Eyebrow: clean, sentence-case, dezent farbig — kein Strich/Quadrat */
+.eyebrow, .eyebrow-teal {
+  display: inline-flex; align-items: center;
+  font-family: var(--f-body); font-size: 0.9375rem; font-weight: 600;
+  letter-spacing: 0; text-transform: none; color: var(--blue);
+}
+.section-index {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-body); font-size: 0.9375rem; font-weight: 600;
+  letter-spacing: 0; text-transform: none; color: var(--blue);
+}
+.section-index > span:first-child { color: var(--blue); font-weight: 600; }
+.label-mono {
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.04em; text-transform: uppercase; color: var(--tx-2);
+}
+
+/* Gradient-Text → schlicht weiß (Apple-Headlines sind einfarbig) */
+.text-gradient, .text-teal-gradient {
+  color: var(--tx-0);
+  -webkit-text-fill-color: currentColor;
+}
+
+/* ── DIVIDER ─────────────────────────────────────────────────── */
+.section-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bd-hi) 20%, var(--bd-hi) 80%, transparent);
+}
+
+/* ── CELONIS-SIGNATUR: Quadrat-Bullet ────────────────────────── */
+.sq {
+  display: inline-block; width: 9px; height: 9px;
+  background: var(--blue); flex-shrink: 0;
+}
+.sq-link {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--f-display); font-size: 1.0625rem; font-weight: 600;
+  color: var(--tx-0); cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.sq-link::before {
+  content: ''; width: 9px; height: 9px; background: var(--blue); flex-shrink: 0;
+  animation: sq-blink 2.4s ease-in-out infinite;
+}
+.sq-link:hover { opacity: 0.7; }
+/* leichtes Blinken des Quadrat-Markers */
+@keyframes sq-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+/* ── TAG-PILL ("Customer Story"-Stil) ────────────────────────── */
+.tag-pill {
+  display: inline-flex; align-items: center;
+  padding: 6px 12px; border-radius: var(--r-sm);
+  font-family: var(--f-body); font-size: 12px; font-weight: 500;
+  color: var(--tx-1); background: rgba(255,255,255,0.07);
+  border: 1px solid var(--bd);
+}
+
+/* ── BUTTONS — Apple Pills ───────────────────────────────────── */
+.btn-violet, .btn-teal {
+  background: var(--blue-dim); color: #ffffff;
+  font-family: var(--f-body); font-size: 0.9375rem; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+  border-radius: var(--r-pill); cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.btn-violet:hover, .btn-teal:hover { background: #0077ED; }
+.btn-violet:active, .btn-teal:active { transform: scale(0.98); }
+
+/* Weiß gefüllte Variante (heller CTA) */
+.btn-light {
+  background: var(--tx-0); color: var(--bg-0);
+  font-family: var(--f-body); font-size: 0.9375rem; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+  border-radius: var(--r-pill); cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.btn-light:hover { background: #ffffff; }
+.btn-light:active { transform: scale(0.98); }
+
+/* Sekundär: dezent umrandet */
+.btn-ghost {
+  background: transparent; color: var(--tx-0);
+  font-family: var(--f-body); font-size: 0.9375rem; font-weight: 500;
+  letter-spacing: 0; text-transform: none;
+  border: 1px solid var(--bd-hi); border-radius: var(--r-pill); cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.04); }
+.btn-ghost:active { transform: scale(0.98); }
+
+/* ── CHIPS — dezente Sans-Pills ──────────────────────────────── */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; font-family: var(--f-body); font-size: 12px; font-weight: 500;
+  letter-spacing: 0; text-transform: none; border-radius: var(--r-pill);
+  color: var(--tx-1); background: var(--bg-2); border: 1px solid var(--bd); white-space: nowrap;
+}
+.chip-violet, .chip-teal { color: var(--blue); border-color: var(--blue-line); background: var(--blue-glow); }
+.chip-cyan   { color: var(--sky-mid);  border-color: var(--sky-line);  background: var(--sky-glow); }
+.chip-ok     { color: var(--ok-mid);   border-color: var(--ok-line);   background: var(--ok-glow); }
+
+/* ── ANIMATIONS — ruhig & sanft ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up   { animation: fadeUp 0.7s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-up-1 { animation: fadeUp 0.7s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-up-2 { animation: fadeUp 0.7s 0.18s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-up-3 { animation: fadeUp 0.7s 0.28s cubic-bezier(0.22,1,0.36,1) both; }
+.animate-fade-up-4 { animation: fadeUp 0.7s 0.38s cubic-bezier(0.22,1,0.36,1) both; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.88); }
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--ok); display: inline-block;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes blink-cursor { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.cursor-blink { animation: blink-cursor 0.9s ease-in-out infinite; }
+
+@keyframes spin-ring { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spin { animation: spin-ring 0.8s linear infinite; }
+
+/* Loud-Effekte deaktiviert (Apple = ruhig) */
+.float { animation: none; }
+.glow-pulse { animation: none; }
+.shimmer::after { content: none; }
+.scanline-overlay::after { content: none; }
+.teal-halo { box-shadow: none; }
+
+.lift { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease; }
+.lift:hover { transform: translateY(-4px); }
+
+/* ── RANGE SLIDER ────────────────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: var(--r-pill);
+  background: var(--bd-hi); outline: none; width: 100%;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 20px; height: 20px; border-radius: 50%; background: #ffffff;
+  cursor: pointer; border: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px; height: 20px; background: #ffffff;
+  cursor: pointer; border: none; border-radius: 50%;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
