@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { SynotixMark } from "@/components/im-brand";
 
 const LINKS = [
@@ -15,6 +16,9 @@ const LINKS = [
 
 export function StartHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const aufStart = pathname === "/";
+  const ctaHref = aufStart ? "#kontakt" : "/kontakt";
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -45,10 +49,10 @@ export function StartHeader() {
         </Link>
 
         <nav className="st-nav" aria-label="Hauptnavigation">
-          {LINKS.map((l) => <Link key={l.href} href={l.href}>{l.label}</Link>)}
+          {LINKS.map((l) => <Link key={l.href} href={l.href} aria-current={pathname.startsWith(l.href) ? "page" : undefined}>{l.label}</Link>)}
         </nav>
 
-        <a className="st-knopf st-knopf-klein" href="#kontakt" data-analytics-event="primary_cta_click">Erstgespräch</a>
+        <Link className="st-knopf st-knopf-klein" href={ctaHref} data-analytics-event="primary_cta_click">Erstgespräch</Link>
 
         <button
           ref={buttonRef}
@@ -64,8 +68,8 @@ export function StartHeader() {
       </div>
 
       <nav id="st-mobilmenue" className="st-mobil" aria-label="Mobile Navigation" hidden={!open}>
-        {LINKS.map((l) => <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>{l.label}</Link>)}
-        <a href="#kontakt" onClick={() => setOpen(false)}>Erstgespräch vereinbaren</a>
+        {LINKS.map((l) => <Link key={l.href} href={l.href} onClick={() => setOpen(false)} aria-current={pathname.startsWith(l.href) ? "page" : undefined}>{l.label}</Link>)}
+        <Link href={ctaHref} onClick={() => setOpen(false)}>Erstgespräch vereinbaren</Link>
       </nav>
     </header>
   );

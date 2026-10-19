@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, JetBrains_Mono, Hanken_Grotesk, Sora } from "next/font/google";
+import { Figtree, JetBrains_Mono, Hanken_Grotesk, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/analytics";
 import { KONTAKT_EMAIL, SEO } from "@/lib/angebot";
@@ -7,6 +7,8 @@ import { KONTAKT_EMAIL, SEO } from "@/lib/angebot";
 const hanken = Hanken_Grotesk({ subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"], variable: "--font-hanken" });
 const figtree = Figtree({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700"], variable: "--font-figtree" });
 const sora = Sora({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-sora" });
+/* Variable Schrift, wird beim Build selbst gehostet (kein Aufruf an Google beim Besuch). */
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
 const jetbrains = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-jetbrains" });
 
 const SITE_URL = "https://www.synotix.de";
@@ -45,7 +47,7 @@ const JSON_LD = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const fontVars = [sora.variable, hanken.variable, figtree.variable, jetbrains.variable].join(" ");
+  const fontVars = [manrope.variable, sora.variable, hanken.variable, figtree.variable, jetbrains.variable].join(" ");
 
   return (
     <html lang="de" className={`dark scroll-smooth ${fontVars}`}>
