@@ -1,6 +1,6 @@
 /* Startseite (Route-Gruppe "start"). Alle Klassen tragen das Präfix st-, damit nichts anderes beeinflusst wird. */
 
-.st-root {
+.st-root, .st-shell {
   --st-weiss: #F3F4F6;
   --st-schwarz: #08080A;
   --st-nacht: #070B16;
@@ -10,7 +10,8 @@
   --st-linie: rgba(255, 255, 255, .14);
   --st-rand: clamp(20px, 6vw, 110px);
   --st-ease: cubic-bezier(.16, 1, .3, 1);
-
+}
+.st-root {
   background: var(--st-schwarz);
   color: var(--st-weiss);
   font-family: var(--font-manrope), system-ui, sans-serif;
@@ -32,6 +33,8 @@ html:has(.st-root) { scroll-padding-top: 88px; }
 .st-root ul, .st-root ol { list-style: none; margin: 0; padding: 0; }
 .st-wrap { max-width: 1320px; margin: 0 auto; width: 100%; }
 .st-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Schutz gegen die nackten nav-Regeln aus blau.css (greifen, wenn beide Stylesheets zusammen geladen sind) */
+.st-nav, .st-mobil, .st-footer nav { position: static; top: auto; z-index: auto; background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom: 0; transition: none; }
 .st-skip { position: fixed; left: 16px; top: -64px; z-index: 100; background: var(--st-weiss); color: var(--st-schwarz); padding: 10px 16px; border-radius: 999px; font-weight: 600; text-decoration: none; transition: top .2s; }
 .st-skip:focus { top: 16px; }
 
@@ -84,6 +87,54 @@ html[data-st-ruhe="an"] .st-puls, html[data-st-ruhe="an"] .st-burst-kern i { ani
 .st-burst-kern { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; transform: translate(-50%, -50%); border-radius: 50%; border: 1px solid rgba(255, 255, 255, .22); display: grid; place-items: center; background: radial-gradient(circle, #05070D 55%, transparent 100%); }
 .st-burst-kern i { width: 10px; height: 10px; border-radius: 50%; background: var(--st-blau); animation: st-atmen 2.6s ease-in-out infinite; }
 @keyframes st-atmen { 0%, 100% { opacity: .55; transform: scale(.85); } 50% { opacity: 1; transform: scale(1.1); } }
+
+/* Kurven-Band (Info-Karten auf einer Zylinderkurve) */
+/* Hoher Abschnitt: das Band bleibt stehen, solange die Karten durchlaufen (9 Karten, etwa 38svh je Karte) */
+.st-kurve-wrap { height: 400svh; }
+.st-kurve-sticky { position: sticky; top: 72px; height: calc(100svh - 72px); }
+.st-kurve-raster { display: none; }
+.st-kurve { height: 100%; background: radial-gradient(60% 42% at 50% 62%, rgba(59, 107, 245, .07), transparent 70%), var(--st-schwarz); color: var(--st-weiss); font-family: var(--font-manrope), system-ui, sans-serif; }
+.st-kurve-fuss { position: absolute; left: 0; right: 0; bottom: clamp(24px, 4vh, 44px); z-index: 10; display: flex; align-items: center; justify-content: center; gap: 18px; }
+.st-kurve-punkte { display: flex; gap: 6px; }
+.st-kurve-zahl { min-width: 4.2em; font-size: 13px; font-weight: 500; letter-spacing: .04em; font-variant-numeric: tabular-nums; color: var(--st-grau); }
+.st-kurve-zahl b { font-weight: 500; color: var(--st-weiss); }
+.st-kurve-punkte i { display: block; width: 14px; height: 2px; border-radius: 1px; background: rgba(255, 255, 255, .3); transition: background .5s var(--st-ease), width .5s var(--st-ease); }
+.st-kurve-punkte i.st-an { width: 32px; background: var(--st-weiss); }
+.st-kurve-in { position: relative; z-index: 10; padding: clamp(40px, 5vw, 64px) var(--st-rand) 0; }
+.st-kurve .st-kopf { margin-bottom: 0; }
+.st-kurve .st-kopf p { max-width: 34ch; }
+.st-karte { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 1.35em 1.4em; border: 1px solid var(--st-linie); border-radius: 1.1em; background: linear-gradient(180deg, #111216 0%, #0B0B0E 100%); color: var(--st-weiss); font-family: var(--font-manrope), system-ui, sans-serif; text-align: left; }
+.st-karte-warum { border-color: rgba(157, 180, 255, .2); background: radial-gradient(120% 90% at 85% 0%, #0D1530 0%, #0A0C12 60%); }
+.st-karte-kopf { display: flex; align-items: center; justify-content: space-between; }
+.st-karte-art { display: inline-flex; align-items: center; gap: .5em; font-size: .62em; font-weight: 500; letter-spacing: .01em; color: var(--st-grau); }
+.st-karte-art i { display: block; width: .5em; height: .5em; border-radius: 50%; background: var(--st-grau); }
+.st-karte-warum .st-karte-art { color: var(--st-blau-hell); }
+.st-karte-warum .st-karte-art i { background: var(--st-blau); }
+.st-karte-ring { display: grid; place-items: center; width: 2.3em; height: 2.3em; border-radius: 50%; border: 1px solid rgba(255, 255, 255, .32); background: radial-gradient(circle at 50% 30%, #15171D, #08080A 70%); box-shadow: 0 0 0 .3em rgba(255, 255, 255, .03); }
+.st-karte-ring svg { width: 1em; height: 1em; color: #EEF1F7; }
+.st-karte-warum .st-karte-ring { border-color: rgba(59, 107, 245, .55); box-shadow: inset 0 0 0 .2em rgba(59, 107, 245, .14); }
+.st-karte-warum .st-karte-ring svg { color: #A9BEFF; }
+.st-karte-titel { font-size: 1.28em; font-weight: 420; line-height: 1.1; letter-spacing: -.03em; text-wrap: balance; max-width: 11.5ch !important; }
+.st-karte-text { margin-top: .7em; font-size: .7em; font-weight: 450; line-height: 1.45; letter-spacing: .005em; color: var(--st-grau); text-wrap: pretty; max-width: 25ch !important; }
+
+/* Ruhiger Modus: reduzierte Bewegung, Pause-Knopf, niedrige Fenster und starker Zoom zeigen alle
+   Karten als Raster, ohne Band, ohne Anheften (WCAG 1.4.10, 2.3.3). */
+@media (prefers-reduced-motion: reduce), (max-height: 640px) {
+  .st-kurve-wrap { height: auto; }
+  .st-kurve-sticky { position: static; height: auto; }
+  .st-kurve { height: auto; overflow: visible; container-type: normal !important; }
+  .st-kurve .tgh-band, .st-kurve .tgh-sr, .st-kurve-fuss { display: none; }
+  .st-kurve-raster { display: grid; }
+}
+html[data-st-ruhe="an"] .st-kurve-wrap { height: auto; }
+html[data-st-ruhe="an"] .st-kurve-sticky { position: static; height: auto; }
+html[data-st-ruhe="an"] .st-kurve { height: auto; overflow: visible; container-type: normal !important; }
+html[data-st-ruhe="an"] .st-kurve .tgh-band, html[data-st-ruhe="an"] .st-kurve .tgh-sr, html[data-st-ruhe="an"] .st-kurve-fuss { display: none; }
+html[data-st-ruhe="an"] .st-kurve-raster { display: grid; }
+.st-kurve .st-kurve-raster { grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 12px; margin-top: clamp(40px, 5vw, 64px); padding-bottom: clamp(56px, 7vw, 96px); list-style: none; font-size: clamp(19px, 1.5vw, 21px); }
+.st-kurve-raster li { display: flex; }
+.st-kurve-raster li > .st-karte { flex: 1; }
+.st-kurve-raster .st-karte { min-height: 10.5em; height: auto; gap: 1.4em; }
 
 /* Pixel-Übergang */
 .st-naht { display: block; width: 100%; height: 56px; }
@@ -181,7 +232,7 @@ html[data-st-ruhe="an"] .st-puls, html[data-st-ruhe="an"] .st-burst-kern i { ani
 .st-gruender h2 { font-size: clamp(34px, 4.2vw, 60px); margin-bottom: 24px; max-width: 16ch; }
 .st-gruender p { color: var(--st-grau); font-size: 18px; margin-bottom: 18px; }
 .st-gruender .st-link { color: var(--st-weiss); text-decoration: underline; }
-.st-zert { margin-top: clamp(70px, 9vw, 130px); padding-top: 40px; border-top: 1px solid var(--st-linie); }
+.st-zert { margin-top: clamp(70px, 9vw, 130px); padding-top: 40px; padding-bottom: 0; border-top: 1px solid var(--st-linie); }
 .st-zert h3 { font-size: 26px; font-weight: 420; margin-bottom: 24px; }
 .st-zert ul { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 .st-zert .st-platz { min-height: 120px; padding: 18px; }
@@ -233,7 +284,7 @@ html[data-st-ruhe="an"] .st-puls, html[data-st-ruhe="an"] .st-burst-kern i { ani
 .st-footer-gitter { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 30px; }
 .st-footer-satz { font-size: 22px; letter-spacing: -.02em; line-height: 1.3; max-width: 18ch !important; }
 .st-footer h2 { font-size: 13.5px; font-weight: 500; letter-spacing: 0; color: var(--st-grau); margin-bottom: 14px; }
-.st-footer ul { display: grid; gap: 8px; font-size: 15px; }
+.st-footer ul { display: grid; gap: 8px; font-size: 15px; list-style: none; margin: 0; padding: 0; }
 .st-footer ul a { text-decoration: none; }
 .st-footer ul a:hover, .st-footer-mail a:hover { text-decoration: underline; }
 .st-footer-mail { margin-top: 48px; font-size: 18px; font-weight: 500; }
@@ -272,7 +323,7 @@ html[data-st-ruhe="an"] .st-puls, html[data-st-ruhe="an"] .st-burst-kern i { ani
 
 /* Reduzierte Bewegung: alles direkt im Endzustand */
 @media (prefers-reduced-motion: reduce) {
-  .st-root *, .st-root *::before, .st-root *::after { transition: none !important; animation: none !important; }
+    .st-root *:not(.st-kurve-kachel), .st-root *::before, .st-root *::after { transition: none !important; animation: none !important; }
   .st-puls { display: none; }
   .st-zeichnung :is(path, rect, circle) { stroke-dashoffset: 0; }
 }

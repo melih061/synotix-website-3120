@@ -3,6 +3,7 @@ import Link from "next/link";
 import { StBurst } from "@/components/start/st-burst";
 import { StFluss } from "@/components/start/st-fluss";
 import { StEinsatz } from "@/components/start/st-einsatz";
+import { StKurve } from "@/components/start/st-kurve";
 import { StLeistungen } from "@/components/start/st-leistungen";
 import { StKontakt } from "@/components/start/st-kontakt";
 import { StNaht } from "@/components/start/st-naht";
@@ -64,6 +65,11 @@ export default function Startseite() {
           </div>
           <StFluss />
         </div>
+      </section>
+
+      {/* Kurven-Band: was sich im Alltag ändert (schwarz wie der Datenfluss, daher ohne Übergang) */}
+      <section className="st-kurve-block" aria-labelledby="st-h-kurve">
+        <StKurve />
       </section>
 
       <StNaht von="#08080A" nach="#F3F4F6" />

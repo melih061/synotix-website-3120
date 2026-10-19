@@ -6,13 +6,24 @@ import { useEffect, useState } from "react";
 export function StRuheKnopf() {
   const [an, setAn] = useState(false);
 
-  useEffect(() => () => { delete document.documentElement.dataset.stRuhe; }, []);
+  // Die Wahl gilt für die ganze Sitzung, auch nach dem Neuladen.
+  useEffect(() => {
+    let gemerkt = false;
+    try { gemerkt = sessionStorage.getItem("st-ruhe") === "an"; } catch {}
+    if (gemerkt) {
+      setAn(true);
+      document.documentElement.dataset.stRuhe = "an";
+      window.dispatchEvent(new Event("st-ruhe"));
+    }
+    return () => { delete document.documentElement.dataset.stRuhe; };
+  }, []);
 
   const umschalten = () => {
     const neu = !an;
     setAn(neu);
     if (neu) document.documentElement.dataset.stRuhe = "an";
     else delete document.documentElement.dataset.stRuhe;
+    try { if (neu) sessionStorage.setItem("st-ruhe", "an"); else sessionStorage.removeItem("st-ruhe"); } catch {}
     window.dispatchEvent(new Event("st-ruhe"));
   };
 
