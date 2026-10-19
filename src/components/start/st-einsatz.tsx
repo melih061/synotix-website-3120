@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { beleg, brief, netz, rastern, zufall, type Motiv } from "./st-motive";
+import { beleg, brief, kurve, netz, pruef, raster, rastern, stapel, zufall, type Motiv } from "./st-motive";
 
 /* Liste mit Balken und schwebender Vorschau-Karte (Prinzip "Hover Image List", 21st.dev, eigene Umsetzung).
    Die Karte folgt dem Mauszeiger mit Feder und neigt sich mit der Bewegung. In ihr fügen sich Pixel
@@ -10,8 +10,12 @@ import { beleg, brief, netz, rastern, zufall, type Motiv } from "./st-motive";
 
 const ZEILEN: { titel: string; bereich: string; text: string; motiv: Motiv }[] = [
   { titel: "Rechnungsprüfung", bereich: "Buchhaltung", text: "Rechnungen auslesen, mit Bestellung und Lieferschein abgleichen, Abweichungen markieren.", motiv: beleg },
-  { titel: "E-Mail-Eingang", bereich: "Verwaltung", text: "Nachrichten sortieren und an die richtige Stelle geben.", motiv: brief },
+  { titel: "Angebote und Anfragen", bereich: "Vertrieb", text: "Anfragen erfassen, Angaben ordnen, Angebotsentwürfe vorbereiten.", motiv: stapel },
+  { titel: "Qualitätsdokumente", bereich: "Qualität", text: "Prüfberichte und Nachweise ablegen, verknüpfen und schnell wiederfinden.", motiv: pruef },
   { titel: "Wissen im Betrieb", bereich: "Alle Bereiche", text: "Antworten aus Handbüchern, Anleitungen und Zeichnungen.", motiv: netz },
+  { titel: "Auswertungen", bereich: "Leitung", text: "Zahlen aus Excel und ERP zusammenführen und lesbar machen.", motiv: kurve },
+  { titel: "E-Mail-Eingang", bereich: "Verwaltung", text: "Nachrichten sortieren und an die richtige Stelle geben.", motiv: brief },
+  { titel: "Stammdaten", bereich: "Einkauf", text: "Artikel- und Lieferantendaten prüfen und vereinheitlichen.", motiv: raster },
 ];
 
 const KARTE_B = 300;

@@ -2,9 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import {
-  BookOpen, ClipboardCheck, GitCompare, GraduationCap, Hourglass, PlugZap, Ruler, ShieldCheck, Workflow,
-} from "lucide-react";
+import { GitCompare, Hourglass, PlugZap, ShieldCheck, Workflow } from "lucide-react";
 import { TiltedGridHero, type TiltedGridTile } from "@/components/ui/tilted-grid-hero";
 
 /* Kurven-Band: Info-Karten laufen auf einer Zylinderkurve. Keine Fotos, keine Zahlen, keine Referenzen.
@@ -19,10 +17,6 @@ const KARTEN: Karte[] = [
   { art: "Vorteil", icon: Workflow, titel: "Schluss mit Abtippen", text: "Daten landen sauber in Excel oder ERP." },
   { art: "Warum Synotix", icon: ShieldCheck, titel: "Datenschutz pro Prozess", text: "Nicht pauschal, sondern für Ihren Ablauf geprüft." },
   { art: "Vorteil", icon: Hourglass, titel: "Mehr Zeit fürs Entscheiden", text: "Routine ist vorbereitet, Ihre Fachleute prüfen nur noch." },
-  { art: "Warum Synotix", icon: Ruler, titel: "Nicht von der Stange", text: "Jede Lösung entsteht für Ihren Ablauf, nicht als Standardpaket." },
-  { art: "Vorteil", icon: BookOpen, titel: "Wissen bleibt im Betrieb", text: "Abläufe sind festgehalten, nicht nur im Kopf Einzelner." },
-  { art: "Warum Synotix", icon: ClipboardCheck, titel: "„Noch nicht“ ist eine Antwort", text: "Die Analyse sagt auch, wenn sich KI noch nicht lohnt." },
-  { art: "Vorteil", icon: GraduationCap, titel: "Ihr Team lernt mit", text: "Schulung am eigenen Ablauf, Begleitung nach Absprache." },
 ];
 
 function InfoKarte({ art, icon: Icon, titel, text }: Karte) {

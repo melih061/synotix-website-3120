@@ -74,6 +74,58 @@ export const netz: Motiv = (g) => {
   g.beginPath(); g.arc(244, 228, 8, 0, Math.PI * 2); g.fill();
 };
 
+/** Angebote und Anfragen: Stapel aus Anfragen, die oberste wird geordnet. */
+export const stapel: Motiv = (g) => {
+  g.fillStyle = W(0.12); g.fillRect(52, 92, 140, 180);
+  linien(g, "M52 92h140v180H52z", 4, W(0.5));
+  g.fillStyle = W(0.22); g.fillRect(80, 64, 140, 180);
+  linien(g, "M80 64h140v180H80z", 4, W(0.75));
+  g.fillStyle = verlauf(g, 0, 36, 0, 216, 0.5, 0.15);
+  g.fillRect(108, 36, 140, 180);
+  linien(g, "M108 36h140v180H108z", 5);
+  linien(g, "M130 74h96M130 100h96M130 126h64", 6, W(0.9));
+  g.fillStyle = AKZENT;
+  g.fillRect(130, 168, 40, 16);
+};
+
+/** Qualitätsdokumente: Prüfsiegel mit Haken. */
+export const pruef: Motiv = (g) => {
+  const v = g.createRadialGradient(130, 120, 10, 150, 150, 110);
+  v.addColorStop(0, W(0.6)); v.addColorStop(1, W(0.08));
+  g.fillStyle = v;
+  g.beginPath(); g.arc(150, 150, 100, 0, Math.PI * 2); g.fill();
+  linien(g, "M150 150m-100 0a100 100 0 1 0 200 0a100 100 0 1 0-200 0", 5);
+  linien(g, "M150 150m-70 0a70 70 0 1 0 140 0a70 70 0 1 0-140 0", 3, W(0.6));
+  linien(g, "m112 152 28 28 52-56", 13);
+  linien(g, "M150 22v22M150 256v22M22 150h22M256 150h22", 6, W(0.8));
+  g.fillStyle = AKZENT;
+  g.fillRect(142, 18, 16, 16);
+};
+
+/** Auswertungen: Säulen und eine Linie, die zusammengeführte Zahlen zeigt. */
+export const kurve: Motiv = (g) => {
+  linien(g, "M44 262h220M44 262V40", 5);
+  const saeulen: [number, number][] = [[70, 70], [120, 120], [170, 160], [220, 200]];
+  for (const [x, h] of saeulen) {
+    g.fillStyle = verlauf(g, 0, 262 - h, 0, 262, 0.7, 0.15);
+    g.fillRect(x - 18, 262 - h, 36, h);
+  }
+  linien(g, "M60 214c30-6 46-40 70-60s50-10 76-46 30-50 46-62", 6);
+  g.fillStyle = AKZENT;
+  g.beginPath(); g.arc(252, 46, 10, 0, Math.PI * 2); g.fill();
+};
+
+/** Stammdaten: Tabelle, in der eine Zelle vereinheitlicht wird. */
+export const raster: Motiv = (g) => {
+  g.fillStyle = verlauf(g, 0, 50, 0, 250, 0.3, 0.08);
+  g.fillRect(50, 50, 200, 200);
+  g.fillStyle = W(0.7); g.fillRect(50, 50, 200, 40);
+  linien(g, "M50 50h200v200H50z", 5);
+  linien(g, "M50 90h200M50 130h200M50 170h200M50 210h200M117 50v200M183 50v200", 3, W(0.75));
+  g.fillStyle = AKZENT;
+  g.fillRect(124, 137, 52, 26);
+};
+
 /** Analyse: Dokument unter der Lupe, im Glas erscheinen die Zeilen größer. */
 export const analyse: Motiv = (g) => {
   g.fillStyle = verlauf(g, 0, 30, 0, 230, 0.36, 0.08);
